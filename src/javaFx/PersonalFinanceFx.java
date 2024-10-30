@@ -5,12 +5,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import money.FileTransactionSaver;
 import money.MoneyCheck;
 
 import java.util.Date;
 
 public class PersonalFinanceFx extends Application {
-    private final MoneyCheck account = new MoneyCheck();
+    private final MoneyCheck account = new MoneyCheck(new FileTransactionSaver());
     private final String fileName = "transactions.txt";
 
     @Override

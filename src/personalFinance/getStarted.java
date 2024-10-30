@@ -1,13 +1,15 @@
 package personalFinance;
 
 import commands.*;
+import money.FileTransactionSaver;
 import money.MoneyCheck;
+import money.TransactionSaver;
 
 import java.util.Scanner;
 
 public class getStarted {
     static Scanner scan = new Scanner(System.in);
-    private static MoneyCheck account = new MoneyCheck();
+    private static MoneyCheck account = new MoneyCheck(new FileTransactionSaver());
     private static CommandManager commandManager = new CommandManager();
 
     public static void start() {

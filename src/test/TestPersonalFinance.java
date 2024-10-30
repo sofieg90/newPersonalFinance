@@ -1,5 +1,6 @@
 package test;
 
+import money.FileTransactionSaver;
 import money.MoneyCheck;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ public class TestPersonalFinance {
 
     @BeforeEach
     public void setUp() {
-        moneyCheck = new MoneyCheck(); // Skapa ett nytt MoneyCheck-objekt före varje test
+        moneyCheck = new MoneyCheck(new FileTransactionSaver()); // Skapa ett nytt MoneyCheck-objekt före varje test
         MoneyCheck.transactions.clear(); //Rensar innan nästa test
     }
 
