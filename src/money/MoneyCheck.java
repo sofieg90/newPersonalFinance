@@ -56,33 +56,45 @@ public class MoneyCheck {
         return balance;
     }
 
-    public double getTotalForPeriod(int calendarField, String type) { // Beräkna pengar baserat på period
-        Calendar cal = Calendar.getInstance(); //Håller reda på datum för varje transaktion
-        Calendar now = Calendar.getInstance(); // Har koll på datum idag
+    public double getTotalForPeriod(int calendarField, String type) {
+        Calendar cal = Calendar.getInstance();
+        Calendar now = Calendar.getInstance();
         double total = 0;
 
         for (Transaction i : transactions) {
+            if (!i.getType().equalsIgnoreCase(type)) continue;  // Fortsätt om typen inte matchar
+
             cal.setTime(i.getDate());
-            if (i.getType().equals(type)) { //Kollar om året på transaktionen och nuvarande år är samma
-                if (calendarField == Calendar.YEAR && cal.get(Calendar.YEAR) == now.get(Calendar.YEAR)) {
-                    total += i.getAmount();
-                } else if (calendarField == Calendar.MONTH &&
-                        cal.get(Calendar.YEAR) == now.get(Calendar.YEAR) &&
-                        cal.get(Calendar.MONTH) == now.get(Calendar.MONTH)) { //kollar om år och sen månad är samma som trans.
-                    total += i.getAmount();
-                } else if (calendarField == Calendar.WEEK_OF_YEAR &&
-                        cal.get(Calendar.YEAR) == now.get(Calendar.YEAR) &&
-                        cal.get(Calendar.WEEK_OF_YEAR) == now.get(Calendar.WEEK_OF_YEAR)) { //kollar vecka
-                    total += i.getAmount();
-                } else if (calendarField == Calendar.DAY_OF_YEAR &&
-                        cal.get(Calendar.YEAR) == now.get(Calendar.YEAR) &&
-                        cal.get(Calendar.DAY_OF_YEAR) == now.get(Calendar.DAY_OF_YEAR)) { //Kollar dag
-                    total += i.getAmount();
-                }
+
+            boolean match = false;
+            switch (calendarField) {
+                case Calendar.YEAR:
+                    match = (cal.get(Calendar.YEAR) == now.get(Calendar.YEAR));
+                    break;
+                case Calendar.MONTH:
+                    match = (cal.get(Calendar.YEAR) == now.get(Calendar.YEAR) &&
+                            cal.get(Calendar.MONTH) == now.get(Calendar.MONTH));
+                    break;
+                case Calendar.WEEK_OF_YEAR:
+                    match = (cal.get(Calendar.YEAR) == now.get(Calendar.YEAR) &&
+                            cal.get(Calendar.WEEK_OF_YEAR) == now.get(Calendar.WEEK_OF_YEAR));
+                    break;
+                case Calendar.DAY_OF_YEAR:
+                    match = (cal.get(Calendar.YEAR) == now.get(Calendar.YEAR) &&
+                            cal.get(Calendar.DAY_OF_YEAR) == now.get(Calendar.DAY_OF_YEAR));
+                    break;
+            }
+
+            if (match) {
+                total += i.getAmount();
+                System.out.println("Matchande transaktion: " + i.getAmount() + " " + i.getDate());
             }
         }
+
+        System.out.println("Total för " + calendarField + ": " + total);
         return total;
     }
+
     public void saveTransactionsToFile(String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) { //Öppna filen fileName rad för rad med bufferedReader:
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
