@@ -11,8 +11,13 @@ import java.io.IOException;
 public class MoneyCheck {
     public static List<Transaction> transactions = new ArrayList<>(); // Lista för att spara alla uttag
     private double balance;
+    private TransactionSaver transactionSaver;
 
-    public void addTransaction(double amount, Date date, String type) { // Lägg till transaktion
+    public MoneyCheck(TransactionSaver transactionSaver) {
+        this.transactionSaver = transactionSaver;
+    }
+
+        public void addTransaction(double amount, Date date, String type) { // Lägg till transaktion
         Transaction transaction = new Transaction(type, amount, date);
         System.out.println("Du har lagt till: " + type + " på " + amount + ".");
         transactions.add(transaction);
