@@ -25,7 +25,6 @@ public class FileTransactionSaver implements TransactionSaver {
     public void deleteTransaction(int id) {
         List<Transaction> transactions = new ArrayList<>();
 
-        // Läs in alla transaktioner
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -45,7 +44,7 @@ public class FileTransactionSaver implements TransactionSaver {
             throw new RuntimeException(e);
         }
 
-        // Skriv tillbaka transaktionerna som finns kvar till filen
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (Transaction transaction : transactions) {
                 writer.write(transaction.getId() + "," + transaction.getAmount() + "," +

@@ -14,32 +14,38 @@ public class MoneyCheck {
     private double balance;
     private TransactionSaver transactionSaver;
 
-
-    public MoneyCheck(FileTransactionSaver fileTransactionSaver) {
+    public MoneyCheck(TransactionSaver transactionSaver) {
         this.transactionSaver = transactionSaver;
     }
-    public void addTransaction(double amount, Date date, String type) { // Lägg till transaktion
+
+    public void addTransaction(double amount, Date date, String type) {
         Transaction transaction = new Transaction(type, amount, date);
         System.out.println("Du har lagt till: " + type + " på " + amount + ".");
         transactions.add(transaction);
-        balance += (type.equalsIgnoreCase("lön") ? amount : -amount); // Om det är lön, öka saldo, annars minska
+        balance += (type.equalsIgnoreCase("lön") ? amount : -amount);
+
+        // Spara transaktionen till fil
+        transactionSaver.saveTransaction(transaction);
     }
 
-    public void deleteTransaction(int belopp) { // Radera transaktion
-        boolean found = false; //False tills en transaktion med samma belopp hittas
-        Iterator<Transaction> iterator = transactions.iterator(); //Gör så att man an gå igenom hela transaktionslistan
+    public void deleteTransaction(int id) {
+        boolean found = false;
+        Iterator<Transaction> iterator = transactions.iterator();
 
-        while (iterator.hasNext()) { //Går igenom listan
+        while (iterator.hasNext()) {
             Transaction t = iterator.next();
-            if (t.getAmount() == belopp) {
+            if (t.getId() == id) {
                 iterator.remove();
-                balance -= belopp;
-
-                found = true; //När beloppet hittats
+                balance -= t.getAmount();
+                found = true;
                 System.out.println("Transaktionen har raderats.");
+
+                // Radera transaktionen från filen
+                transactionSaver.deleteTransaction(id);
                 break;
             }
         }
+
         if (!found) {
             System.out.println("Ingen transaktion med detta belopp hittades.");
         }
