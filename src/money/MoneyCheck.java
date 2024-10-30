@@ -87,11 +87,11 @@ public class MoneyCheck {
 
             if (match) {
                 total += i.getAmount();
-                System.out.println("Matchande transaktion: " + i.getAmount() + " " + i.getDate());
+               // System.out.println("Matchande transaktion: " + i.getAmount() + " " + i.getDate());
             }
         }
 
-        System.out.println("Total för " + calendarField + ": " + total);
+       // System.out.println("Total för " + calendarField + ": " + total);
         return total;
     }
 
