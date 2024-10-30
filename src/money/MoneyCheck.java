@@ -1,6 +1,7 @@
 package money;
 
 import personalFinance.Transaction;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -13,11 +14,11 @@ public class MoneyCheck {
     private double balance;
     private TransactionSaver transactionSaver;
 
-    public MoneyCheck(TransactionSaver transactionSaver) {
+
+    public MoneyCheck(FileTransactionSaver fileTransactionSaver) {
         this.transactionSaver = transactionSaver;
     }
-
-        public void addTransaction(double amount, Date date, String type) { // Lägg till transaktion
+    public void addTransaction(double amount, Date date, String type) { // Lägg till transaktion
         Transaction transaction = new Transaction(type, amount, date);
         System.out.println("Du har lagt till: " + type + " på " + amount + ".");
         transactions.add(transaction);
@@ -87,11 +88,11 @@ public class MoneyCheck {
 
             if (match) {
                 total += i.getAmount();
-               // System.out.println("Matchande transaktion: " + i.getAmount() + " " + i.getDate());
+                // System.out.println("Matchande transaktion: " + i.getAmount() + " " + i.getDate());
             }
         }
 
-       // System.out.println("Total för " + calendarField + ": " + total);
+        // System.out.println("Total för " + calendarField + ": " + total);
         return total;
     }
 
@@ -135,3 +136,4 @@ public class MoneyCheck {
         }
     }
 }
+
