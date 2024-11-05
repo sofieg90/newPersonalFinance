@@ -10,6 +10,7 @@ public class AddTransaction extends Command {
 
 
     public AddTransaction(MoneyCheck moneyCheck) {
+
         this.account = moneyCheck;
     }
 

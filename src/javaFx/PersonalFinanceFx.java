@@ -56,7 +56,6 @@ public class PersonalFinanceFx extends Application {
             }
         });
 
-
         deleteTransactionButton.setOnAction(e -> { //raderar transaktion
             try {
                 double amount = Double.parseDouble(amountField.getText());
@@ -117,9 +116,5 @@ public class PersonalFinanceFx extends Application {
                 "Månadsvis: " + account.getTotalForPeriod(java.util.Calendar.MONTH, "lön") + " kr\n" +
                 "Veckovis: " + account.getTotalForPeriod(java.util.Calendar.WEEK_OF_YEAR, "lön") + " kr\n" +
                 "Dagvis: " + account.getTotalForPeriod(java.util.Calendar.DAY_OF_YEAR, "lön") + " kr";
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

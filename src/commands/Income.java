@@ -13,10 +13,10 @@ public class Income extends Command {
     @Override
     public void execute() {
 
-        double incomeYear = account.getTotalForPeriod(Calendar.YEAR, "LÖN");
-        double incomeMonth = account.getTotalForPeriod(Calendar.MONTH, "LÖN");
-        double incomeWeek = account.getTotalForPeriod(Calendar.WEEK_OF_YEAR, "LÖN");
-        double incomeDay = account.getTotalForPeriod(Calendar.DAY_OF_YEAR, "LÖN");
+        double incomeYear = account.getTotalForPeriod(java.util.Calendar.YEAR, "lön");
+        double incomeMonth = account.getTotalForPeriod(java.util.Calendar.MONTH, "lön");
+        double incomeWeek = account.getTotalForPeriod(java.util.Calendar.WEEK_OF_YEAR, "lön");
+        double incomeDay = account.getTotalForPeriod(java.util.Calendar.DAY_OF_YEAR, "lön");
 
         System.out.println("Din inkomst årsvis: " + incomeYear + " kr.");
         System.out.println("Din inkomst månadsvis: " + incomeMonth + " kr.");

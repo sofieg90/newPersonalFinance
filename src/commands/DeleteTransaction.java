@@ -11,7 +11,6 @@ public class DeleteTransaction extends Command {
         this.account = moneyCheck;
     }
 
-
     @Override
     public void execute() {
         Scanner scan = new Scanner(System.in);

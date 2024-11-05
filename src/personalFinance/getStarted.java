@@ -3,7 +3,6 @@ package personalFinance;
 import commands.*;
 import money.FileTransactionSaver;
 import money.MoneyCheck;
-import money.TransactionSaver;
 
 import java.util.Scanner;
 
@@ -11,12 +10,9 @@ public class getStarted {
     static Scanner scan = new Scanner(System.in);
     private static MoneyCheck account = new MoneyCheck(new FileTransactionSaver());
     private static CommandManager commandManager = new CommandManager();
-    TransactionSaver fileTransactionSaver = new FileTransactionSaver();
-    MoneyCheck moneyCheck = new MoneyCheck(fileTransactionSaver);
 
     public static void start() {
         account.loadTransactionsFromFile("transaction.txt"); //Laddar transaktioner från filen filename
-
 
         commandManager.registerCommand(1, new AddTransaction(account));
         commandManager.registerCommand(2, new DeleteTransaction(account));

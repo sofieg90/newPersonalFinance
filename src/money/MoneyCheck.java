@@ -21,33 +21,34 @@ public class MoneyCheck {
     public void addTransaction(double amount, Date date, String type) {
         Transaction transaction = new Transaction(type, amount, date);
         System.out.println("Du har lagt till: " + type + " på " + amount + ".");
-        transactions.add(transaction);
-        balance += (type.equalsIgnoreCase("lön") ? amount : -amount);
 
-        // Spara transaktionen till fil
+        // Spara transaktionen
         transactionSaver.saveTransaction(transaction);
+
+        transactions.add(transaction);
+        balance += (type.equalsIgnoreCase("lön") ? amount : -amount); // Om det är lön, öka saldo, annars minska
     }
 
     public void deleteTransaction(int id) {
-        boolean found = false;
-        Iterator<Transaction> iterator = transactions.iterator();
+        boolean found = false; //False tills en transaktion med samma ID hittas
+        Iterator<Transaction> iterator = transactions.iterator(); //Gör så att man kan gå igenom hela transaktionslistan
 
-        while (iterator.hasNext()) {
+        while (iterator.hasNext()) { //Går igenom listan
             Transaction t = iterator.next();
-            if (t.getId() == id) {
+            if (t.getId() == id) { // Ändrad för att jämföra med ID
                 iterator.remove();
-                balance -= t.getAmount();
-                found = true;
-                System.out.println("Transaktionen har raderats.");
+                balance -= t.getAmount(); // Använd beloppet från transaktionen
 
-                // Radera transaktionen från filen
-                transactionSaver.deleteTransaction(id);
+                // Radera transaktionen
+                transactionSaver.deleteTransaction(t.getId());
+
+                found = true; // När ID:t hittas
+                System.out.println("Transaktionen har raderats.");
                 break;
             }
         }
-
         if (!found) {
-            System.out.println("Ingen transaktion med detta belopp hittades.");
+            System.out.println("Ingen transaktion med detta ID hittades.");
         }
     }
 
@@ -91,14 +92,10 @@ public class MoneyCheck {
                             cal.get(Calendar.DAY_OF_YEAR) == now.get(Calendar.DAY_OF_YEAR));
                     break;
             }
-
             if (match) {
                 total += i.getAmount();
-                // System.out.println("Matchande transaktion: " + i.getAmount() + " " + i.getDate());
             }
         }
-
-        // System.out.println("Total för " + calendarField + ": " + total);
         return total;
     }
 

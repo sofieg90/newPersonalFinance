@@ -5,47 +5,46 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Transaction {
-    public double amount;
-    public Date date;
-    public String type;
-    private final int id;
     private static int counter = 0;
+    private int id;
+    private double amount;
+    private String type;
+    private Date date;
 
     public Transaction(String type, double amount, Date date) {
         this.id = ++counter;
         this.amount = amount;
-        this.date = date;
         this.type = type;
+        this.date = date;
     }
-    public Transaction(int id, double amount, String dateAsString, String type) throws ParseException {
+
+    public Transaction(int id, double amount, String date, String type) throws ParseException {
         this.id = id;
         this.amount = amount;
-        this.date = new SimpleDateFormat("yyyy-MM-dd").parse(dateAsString);
         this.type = type;
-    }
-
-
-    public double getAmount() {
-
-        return amount;
-    }
-
-    public Date getDate() {
-
-        return date;
-    }
-
-    public String getType() {
-
-        return type;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Format för datum
+        this.date = sdf.parse(date);
     }
 
     public int getId() {
         return id;
     }
 
+    public double getAmount() {
+        return amount;
+    }
+
     public String getDateAsString() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        return formatter.format(date);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(date);
+    }
+
+    public String getType() {
+        return type;
+    }
+
+
+    public Date getDate() {
+        return date;
     }
 }
