@@ -11,7 +11,7 @@ import java.io.IOException;
 public class MoneyCheck {
     public static List<Transaction> transactions = new ArrayList<>(); // Lista för att spara alla uttag
     private double balance;
-    private TransactionSaver transactionSaver;
+    private final TransactionSaver transactionSaver;
 
     public MoneyCheck(TransactionSaver transactionSaver) {
         this.transactionSaver = transactionSaver;
@@ -140,10 +140,10 @@ public class MoneyCheck {
 
     public static class Transaction {
         private static int counter = 0;
-        private int id;
-        private double amount;
-        private String type;
-        private Date date;
+        private final int id;
+        private final double amount;
+        private final String type;
+        private final Date date;
 
         public Transaction(String type, double amount, Date date) {
             this.id = ++counter;

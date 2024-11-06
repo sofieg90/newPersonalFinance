@@ -5,7 +5,7 @@ import money.MoneyCheck;
 import java.util.Scanner;
 
 public class DeleteTransaction extends Command {
-    private MoneyCheck account;
+    private final MoneyCheck account;
 
     public DeleteTransaction(MoneyCheck moneyCheck) {
         this.account = moneyCheck;

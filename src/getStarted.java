@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class getStarted {
     static Scanner scan = new Scanner(System.in);
-    private static MoneyCheck account = new MoneyCheck(new FileTransactionSaver());
-    private static CommandManager commandManager = new CommandManager();
+    private static final MoneyCheck account = new MoneyCheck(new FileTransactionSaver());
+    private static final CommandManager commandManager = new CommandManager();
 
     public static void start() {
         account.loadTransactionsFromFile("transaction.txt"); //Laddar transaktioner från filen filename

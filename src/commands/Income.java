@@ -4,7 +4,7 @@ import money.MoneyCheck;
 import java.util.Calendar;
 
 public class Income extends Command {
-    private MoneyCheck account;
+    private final MoneyCheck account;
 
     public Income(MoneyCheck moneyCheck) {
         this.account = moneyCheck;
