@@ -1,5 +1,3 @@
-package personalFinance;
-
 import commands.*;
 import money.FileTransactionSaver;
 import money.MoneyCheck;
