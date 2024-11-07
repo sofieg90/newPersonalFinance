@@ -14,11 +14,11 @@ public class DeleteTransaction extends Command {
     @Override
     public void execute() {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Ange beoppet på transaktionen du vill radera: ");
+        System.out.println("Ange beloppet på transaktionen som du vill radera: ");
         int belopp = scan.nextInt();
 
         account.deleteTransaction(belopp);
-        account.saveTransactionsToFile("transactions.txt");
+        account.saveTransactionsToFile("transaction.txt");
     }
 
 }

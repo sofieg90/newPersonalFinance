@@ -27,26 +27,23 @@ public class MoneyCheck {
         balance += (type.equalsIgnoreCase("lön") ? amount : -amount); // Om det är lön, öka saldo, annars minska
     }
 
-    public void deleteTransaction(int id) {
-        boolean found = false; //False tills en transaktion med samma ID hittas
-        Iterator<Transaction> iterator = transactions.iterator(); //Gör så att man kan gå igenom hela transaktionslistan
+    public void deleteTransaction(int belopp) { // Radera transaktion
+        boolean found = false; //False tills en transaktion med samma belopp hittas
+        Iterator<Transaction> iterator = transactions.iterator(); //Gör så att man an gå igenom hela transaktionslistan
 
         while (iterator.hasNext()) { //Går igenom listan
             Transaction t = iterator.next();
-            if (t.getId() == id) { // Ändrad för att jämföra med ID
+            if (t.getAmount() == belopp) {
                 iterator.remove();
-                balance -= t.getAmount(); // Använd beloppet från transaktionen
+                balance -= belopp;
 
-                // Radera transaktionen
-                transactionSaver.deleteTransaction(t.getId());
-
-                found = true; // När ID:t hittas
+                found = true; //När beloppet hittats
                 System.out.println("Transaktionen har raderats.");
                 break;
             }
         }
         if (!found) {
-            System.out.println("Ingen transaktion med detta ID hittades.");
+            System.out.println("Ingen transaktion med detta belopp hittades.");
         }
     }
 

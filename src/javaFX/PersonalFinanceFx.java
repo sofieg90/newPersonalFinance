@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class PersonalFinanceFx extends Application {
     private final MoneyCheck account = new MoneyCheck(new FileTransactionSaver());
-    private final String fileName = "transactions.txt";
+    private final String fileName = "transaction.txt";
 
     @Override
     public void start(Stage primaryStage) {
