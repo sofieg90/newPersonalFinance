@@ -4,7 +4,7 @@ import money.MoneyCheck;
 
 import java.util.Scanner;
 
-public class getStarted {
+public class StartChoise {
     static Scanner scan = new Scanner(System.in);
     private static final MoneyCheck account = new MoneyCheck(new FileTransactionSaver());
     private static final CommandManager commandManager = new CommandManager();

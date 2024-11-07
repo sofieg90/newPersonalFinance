@@ -9,7 +9,7 @@ public class FileTransactionSaver implements TransactionSaver {
     private static final String FILE_NAME = "transaction.txt";
 
     @Override
-    public void saveTransaction(MoneyCheck.Transaction transaction) {
+    public void saveTransaction(Transaction transaction) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
             writer.write(transaction.getId() + "," + transaction.getAmount() + "," +
                     transaction.getDateAsString() + "," + transaction.getType());
@@ -21,7 +21,7 @@ public class FileTransactionSaver implements TransactionSaver {
 
     @Override
     public void deleteTransaction(int id) {
-        List<MoneyCheck.Transaction> transactions = new ArrayList<>();
+        List<Transaction> transactions = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line;
@@ -33,7 +33,7 @@ public class FileTransactionSaver implements TransactionSaver {
                     double amount = Double.parseDouble(parts[1]);
                     String date = parts[2];
                     String type = parts[3];
-                    transactions.add(new MoneyCheck.Transaction(transactionId, amount, date, type));
+                    transactions.add(new Transaction(transactionId, amount, date, type));
                 }
             }
         } catch (IOException e) {
@@ -44,7 +44,7 @@ public class FileTransactionSaver implements TransactionSaver {
 
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            for (MoneyCheck.Transaction transaction : transactions) {
+            for (Transaction transaction : transactions) {
                 writer.write(transaction.getId() + "," + transaction.getAmount() + "," +
                         transaction.getDateAsString() + "," + transaction.getType());
                 writer.newLine();

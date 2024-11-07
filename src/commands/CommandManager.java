@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandManager {
-    private Map<Integer, Command> commandMap = new HashMap<>();
+    private final Map<Integer, Command> commandMap = new HashMap<>();
 
     public void registerCommand(int option, Command command) {
+
         commandMap.put(option, command);
     }
 

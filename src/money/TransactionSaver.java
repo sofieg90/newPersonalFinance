@@ -1,7 +1,7 @@
 package money;
 
 public interface TransactionSaver {
-    void saveTransaction(MoneyCheck.Transaction transaction);
+    void saveTransaction(Transaction transaction);
 
     void deleteTransaction(int id);
 }
